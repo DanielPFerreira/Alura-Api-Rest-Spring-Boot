@@ -1,0 +1,5 @@
+ALTER TABLE medicos
+DROP COLUMN ativo;
+
+ALTER TABLE medicos
+ADD COLUMN ativo BOOLEAN DEFAULT true;
