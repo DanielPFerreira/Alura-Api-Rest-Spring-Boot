@@ -1,4 +1,4 @@
-package med.voll.api.domain.controller;
+package med.voll.api.controller;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -44,16 +44,24 @@ public class MedicoController {
         return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
     }
 
+    /* Delete logico*/
+     @DeleteMapping("/{id}")
+     @Transactional
+     public ResponseEntity excluir (@PathVariable Long id){
+         var medico = repository.getReferenceById(id);
+         medico.excluir();
+
+         return ResponseEntity.noContent().build();
+
+     }
+
+ /* Delete do banco de dados
     @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity excluir (@PathVariable Long id){
-        var medico = repository.getReferenceById(id);
-        medico.excluir();
-
-        return ResponseEntity.noContent().build();
-
+ @Transactional
+    public void excluir (@PathVariable Long id){
+      repository.deleteById(id);
     }
-
+*/
     @GetMapping("/{id}")
     public ResponseEntity detalhar (@PathVariable Long id){
         var medico = repository.getReferenceById(id);
